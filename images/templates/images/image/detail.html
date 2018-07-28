@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{{ image.title }}{% endblock %}
+{% block content %}
+<h1>{{ image.title }}</h1>
+
+<a href="{{ image.image.url }}">
+<img src="{{ image.image.url }}" height=500 width=700 class="image-detail">
+</a>
+
+<p>{{ image.user_like.count }}Likes <a href='{{ image.get_like_url }}'>{% if request.user not in image.user_like.all %}Like{% else %}Unlike{% endif %}</a></p>
+
+{{ image.description|linebreaks }}
+{% endblock %}
+{% block comment %}
+<div class='comments'>
+<form method="POST" action=".">
+	{% csrf_token %}
+	{{ comment_form|crispy }}
+	<input type='submit' value='Post comment' class='btn btn-default'>
+</form>
+<br><br><br>
+<p>Comments</p>
+{% for comment in comments %}
+<p>{{ comment.user.username }}<br>
+{{ comment.content }}<br>
+{{ comment.created|timesince }} ago</p>
+{% endfor %}
+</div>
+{% endblock %}
+

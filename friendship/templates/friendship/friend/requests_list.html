@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% for friendship_request in requests %}
+   <a href="{% url 'user_detail' friendship_request.from_user %}"><img src="{{ friendship_request.from_user.profile.photo.url }}" height=200 width=200></a><br>
+   <a href="{% url 'user_detail' friendship_request.from_user %}"> {{ friendship_request.from_user }}</a> to you <a href="{% url 'friendship:friendship_requests_detail' friendship_request.id %}">view</a><br>
+{% empty %}
+
+<div>no requests:</div>
+{% endfor %}
+{% endblock %}

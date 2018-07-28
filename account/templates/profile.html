@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<style>
+a {
+	color:blue;
+}
+</style>
+
+{% block title %}{{ user.get_full_name }}{% endblock %}
+{% block content %}
+<h3>{{ user.username }}</h3>
+
+<img src='{{ user.profile.photo.url }}' height=300 width=300 class=img-responsive><br>
+
+<a href="{% url 'edit' user.username %}">Edit Your Profile</a><br>
+Email:{{ user.email }}<br>
+Born on {{ user.profile.date_of_birth }}<br>
+<h3>Your images<br>
+{% for image in user.images_created.all %}
+<a href="{% url 'image:detail' image.id %}"><img src="{{ image.image.url }}" height=100 width=100 class="item-img"></a>
+{% endfor %}</h3>
+{% endblock %}

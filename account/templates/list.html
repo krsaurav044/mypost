@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}User list{% endblock %}
+{% block content %}
+{% for user in users %}
+<p><img src="{{ user.profile.photo.url }}" height=200 width=200 class='img-responsive'></p>
+<p><a href="{% url 'user_detail' user.username %}" class="title">
+				{{ user.get_full_name }}
+			</a></p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load friendshiptags %}
+<h1>Your Friends</h1>
+<!--{% get_by_name friendship_context_object_name as var %}
+{% friends var %}-->
+{% for friend in friends %}
+<p><a href="{% url 'user_detail' friend.username %}"><img src="{{ friend.profile.photo.url }}" height=200 width=200></a><br>
+{{ friend.username }}|<a href="{% url 'friendship:friendship_remove_friend' friend.username %}">Unfriend</p>
+{% endfor %}
+{% endblock %}

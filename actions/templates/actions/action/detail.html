@@ -1,0 +1,39 @@
+
+
+{% with user=action.user profile=action.user.profile %}
+<div class="action">
+	<div class="images">
+
+		{% if action.target %}
+			{% with target=action.target %}
+			
+                {% if target.image %}
+                    
+                        
+                        
+                       {% if profile.photo %}
+            
+                
+					<a href="{% url 'user_detail' user.username %}"><img src="{{ user.profile.photo.url }}" height=50 width=50 alt="{{ user.get_full_name }}" class="item-img"></a>{{ user.username }} {{ action.verb }}
+				   {% endif %}<br>
+							<a href="{{ target.get_absolute_url }}"><img src="{{ target.image.url }}" height=400 width=600 class="item-img"></a>
+                        <br>
+                        <p>{{ target.user_like.count }}Likes <a href='{{ target.get_like_url1 }}'>{% if request.user not in target.user_like.all %}Like{% else %}Unlike{% endif %}</a></p>
+                        {{ target.title }}
+                        {{ target.coment.count }}<br>
+						
+                        {{ action.created|timesince }} ago<br />
+                {% endif %}
+                
+			{% endwith %}
+		{% endif %}<br>
+
+
+        
+		
+	</div>
+
+</div>
+
+{% endwith %}
+

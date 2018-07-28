@@ -1,0 +1,80 @@
+<style>
+    	body {
+		position:relative;
+	}
+	.main {
+		text-align: center;
+	}
+	.hd {
+		position: absolute;
+		margin-top:0px;
+		width:1350px;
+		height:50px;
+		background-color: grey;
+	}
+	.post {
+		margin-top: 0px;
+		font-size: 20px;
+		float:left;
+		
+	}
+	li a {
+		margin-right: 10px;
+		float:right;
+		list-style: none;
+		color: white;
+		text-decoration: none;
+	}
+</style>
+</head>
+<body>
+	<div class='hd'>
+	<ul class='header'>
+		
+		<li><a href="{% url 'friendship:friendship_view_friends' user.username %}">Friends</a></li>
+		<li><a href="{% url 'friendship:friendship_view_users' %}">All users</a></li>
+		<li><a href="{% url 'profile' user.username %}">Profile</a></li>
+		<li><a href="{% url 'logout' %}">Log-out</a></li>
+		<li><a href="{% url 'friendship:friendship_request_list' user.username %}">Requests</a></li>
+		<li class='post'><a href="{% url 'image:list' user.username %}">My Post</a></li>
+	</ul>
+</div>
+<br>
+<br>
+<style>
+li {
+	list-style: none;
+}
+</style>
+<br><br>
+<form method='GET' action=''>
+    <input type='text' name='q' placeholder='Search new people'/>
+    <input type='submit' value='Search' />
+</form>
+
+{% for list_user in users %}
+    
+        {% if user %}
+           <a href="{% url 'user_detail' list_user.username %}"><p> <img src="{{ list_user.profile.photo.url }}" height=200 width=250 ></a><br>
+            {{ list_user.username }} | <a href="{% url 'friendship:friendship_add_friend' list_user.username %}"><button type="button">Add Friend</button></a> <br></p>
+        {% endif %}
+    
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ users.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ users.number }} of {{ users.paginator.num_pages }}.
+        </span>
+
+        {% if users.has_next %}
+            <a href="?page={{ users.next_page_number }}">next</a>
+            <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+

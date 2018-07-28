@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Mypost{% endblock %}
+{% block content %}
+
+{% for friend in friendss %}
+<p>Posted by {{ friend.username }}</p>
+{% for image in friend.images_created.all %}
+{{ image.title }}<br>
+<img src="{{ image.image.url }}" height=300 width=300 class='img-responsive'><br>
+{{ image.description }}<br>
+<p>Posted on {{ image.created }}</p>
+{% endfor %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<style>
+	body {
+		position:relative;
+		
+	}
+	.container {
+		
+		max-width: 1500px;
+		float:left;
+		
+	}
+
+	.fix {
+		margin-left: 820px;
+		position: fixed;
+		float:right;
+	}
+	.main {
+		
+		width:800px;
+		
+		float:left;
+	}
+	.comments {
+		position:absolute;
+		float:left;
+		position: fixed;
+		margin-left: 800px;
+		width:500px;
+		background-color: grey;
+		top:175px;
+		bottom:20px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		padding-left: 10px;
+
+	}
+	
+	form {
+		position:absolute;
+		width:500px;
+	}
+
+	.utils {
+		margin-right: 30px;
+		float:left;
+	}
+	.online {
+		width:400;
+		float:left;
+		background-color: grey;
+	}
+	.util {
+		float:right;
+
+
+	}
+	.side {
+		background-color: grey;
+		width: 300px;
+		float:left;
+	}
+	.hd {
+		position: absolute;
+		margin-top:0px;
+		width:1350px;
+		height:50px;
+		background-color: grey;
+		position:fixed;
+	}
+	.post {
+		
+		font-size: 20px;
+		float:left;
+		margin-left: 0px;
+		
+	}
+	span {
+		color:white;
+	}
+	li {
+		margin-top: 10px;
+		margin-right: 10px;
+
+		float:right;
+		list-style: none;
+	}
+	li a {
+		color:white;
+		text-decoration: none;
+	}
+	.s {
+		margin-right: 850px;
+		
+	}
+
+</style>
+</head>
+<body>
+	<div class='hd'>
+	<ul class='header'>
+		
+		<li><a href="{% url 'friendship:friendship_view_friends' user.username %}">Friends</a></li>
+		<li><a href="{% url 'friendship:friendship_view_users' %}">Suggestions</a></li>
+		<li><a href="{% url 'profile' user.username %}">Profile</a></li>
+		<li><a href="{% url 'log-out' %}">Log-out</a></li>
+		<li><a href="{% url 'friendship:friendship_request_list' user.username %}">Requests</a></li>
+		<li class='s'>{% block search %}{% endblock %}</li>
+		
+		
+		<li class='post'><a href="{% url 'image:list' user.username %}">My Post</a></li>
+	</ul>
+</div><br><br>
+<br>
+<div class='container'>
+<div class="main">
+	{% block post %}
+	
+	{% endblock %}
+
+{% block content %}{% endblock %}
+
+</div>
+<br><br>
+<div class='fix'>
+<div class='utils'>
+{% block headings %}{% endblock %}
+<div class='online'>
+{% block online %}{% endblock %}
+</div>
+</div>
+<div class="util">
+{% block heading %}{% endblock %}
+<div class='side'>
+
+{% block sidebar %}{% endblock %}
+<div class=forms>
+{% block form %}{% endblock %}
+</div>
+</div>
+</div>
+</div>
+{% block comment %}{% endblock %}
+</div>
+
+</body>
+</html>

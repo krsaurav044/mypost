@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Friendship</title>
+<style>
+    	body {
+		position:relative;
+	}
+	.main {
+		text-align: center;
+	}
+	.hd {
+		position: absolute;
+		margin-top:0px;
+		width:1350px;
+		height:50px;
+		background-color: grey;
+	}
+	.post {
+		margin-top: 0px;
+		font-size: 20px;
+		float:left;
+		
+	}
+	li {
+		margin-right: 10px;
+		float:right;
+		list-style: none;
+		color: white;
+		text-decoration: none;
+	}
+</style>
+</head>
+<body>
+	<div class='hd'>
+	<ul class='header'>
+		
+		<li><a href="{% url 'friendship:friendship_view_friends' user.username %}">Friends</a></li>
+		<li><a href="{% url 'friendship:friendship_view_users' %}">All users</a></li>
+		<li><a href="{% url 'profile' user.username %}">Profile</a></li>
+		<li class='post'>My Post</li>
+	</ul>
+</div>
+{% block header %}
+    {% include 'header.html' %}
+{% endblock header %}
+{% block content %}{% endblock content %}
+</body>
+</html>
